@@ -6,6 +6,7 @@ import Image1 from "../images/Image1.jpeg";
 import Image3 from "../images/Image3.jpeg";
 import "./List.css";
 
+
 const MuscleGroup = ({ onMuscleGroupClick }) => {
   const [muscleGroups, setMuscleGroups] = useState([]);
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const MuscleGroup = ({ onMuscleGroupClick }) => {
   return (
     <Container className="mt-5">
       <Row className="mb-4 text-center">
-        <Col md={12}>
+        <Col md={12} className="custom-row">
           <h3>Training Guide Central Hub</h3>
           <p>
             Below are the guides, linked here for easy access, and designed for
@@ -59,7 +60,7 @@ const MuscleGroup = ({ onMuscleGroupClick }) => {
         </Col>
       </Row>
 
-      <Row className="mt-5">
+      <Row className="mt-5 custom-row">
         <Col md={{ span: 8, offset: 2 }}>
           <h3>Understanding Muscle Groups</h3>
           <p>

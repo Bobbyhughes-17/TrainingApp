@@ -28,7 +28,7 @@ namespace TrainingApp.Repositories
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT Id, Name, DaysPerWeek FROM TrainingProgram";
+                    cmd.CommandText = "SELECT Id, Name, DaysPerWeek, ProgramDescription FROM TrainingProgram";
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     List<TrainingProgram> trainingPrograms = new List<TrainingProgram>();
@@ -38,7 +38,8 @@ namespace TrainingApp.Repositories
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             Name = reader.GetString(reader.GetOrdinal("Name")),
-                            DaysPerWeek = reader.GetInt32(reader.GetOrdinal("DaysPerWeek"))
+                            DaysPerWeek = reader.GetInt32(reader.GetOrdinal("DaysPerWeek")),
+                            ProgramDescription = reader.GetString(reader.GetOrdinal("ProgramDescription"))
                         };
 
                         trainingPrograms.Add(trainingProgram);
@@ -57,7 +58,7 @@ namespace TrainingApp.Repositories
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT Id, Name, DaysPerWeek FROM TrainingProgram WHERE Id = @id";
+                    cmd.CommandText = "SELECT Id, Name, DaysPerWeek, ProgramDescription FROM TrainingProgram WHERE Id = @id";
                     cmd.Parameters.AddWithValue("@id", id);
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -67,7 +68,8 @@ namespace TrainingApp.Repositories
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             Name = reader.GetString(reader.GetOrdinal("Name")),
-                            DaysPerWeek = reader.GetInt32(reader.GetOrdinal("DaysPerWeek"))
+                            DaysPerWeek = reader.GetInt32(reader.GetOrdinal("DaysPerWeek")),
+                            ProgramDescription = reader.GetString(reader.GetOrdinal("ProgramDescription"))
                         };
 
                         reader.Close();
@@ -89,11 +91,12 @@ namespace TrainingApp.Repositories
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO TrainingProgram (Name, DaysPerWeek) 
+                    cmd.CommandText = @"INSERT INTO TrainingProgram (Name, DaysPerWeek, ProgramDescription) 
                                 OUTPUT INSERTED.ID
-                                VALUES (@name, @daysPerWeek)";
+                                VALUES (@name, @daysPerWeek, @programDescription)";
                     cmd.Parameters.AddWithValue("@name", trainingProgram.Name);
                     cmd.Parameters.AddWithValue("@daysPerWeek", trainingProgram.DaysPerWeek);
+                    cmd.Parameters.AddWithValue("@programDescription", trainingProgram.ProgramDescription);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -108,10 +111,11 @@ namespace TrainingApp.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"UPDATE TrainingProgram 
-                                SET Name = @name, DaysPerWeek = @daysPerWeek 
+                                SET Name = @name, DaysPerWeek = @daysPerWeek, ProgramDescription = @programDescription
                                 WHERE Id = @id";
                     cmd.Parameters.AddWithValue("@name", trainingProgram.Name);
                     cmd.Parameters.AddWithValue("@daysPerWeek", trainingProgram.DaysPerWeek);
+                    cmd.Parameters.AddWithValue("@programDescription", trainingProgram.ProgramDescription);
                     cmd.Parameters.AddWithValue("@id", trainingProgram.Id);
 
                     cmd.ExecuteNonQuery();

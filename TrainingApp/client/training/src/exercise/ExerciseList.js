@@ -19,7 +19,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const ExerciseList = ({ muscleGroupId }) => {
-  const { id } = useParams();
   const [exercises, setExercises] = useState([]);
   const { id: routeId } = useParams();
   // getting the muscle group id to use from the id prop 

@@ -8,6 +8,7 @@ import {
   addExerciseToDay,
 } from "../Managers/DayExerciseManager";
 import { useParams } from "react-router-dom";
+import { addDay } from "../Managers/DayManager";
 import { getAllMuscleGroups } from "../Managers/MuscleGroupManager";
 import { getDaysForTrainingProgram } from "../Managers/DayManager";
 import { ListGroup, Modal, Button } from "react-bootstrap";
@@ -23,6 +24,8 @@ const DayList = () => {
   const [showModal, setShowModal] = useState(false);
   const [allExercises, setAllExercises] = useState([]);
   const [selectedDayId, setSelectedDayId] = useState(null);
+  const [showAddDayModal, setShowAddDayModal] = useState(false);
+  const [newDayTitle, setNewDayTitle] = useState("");
 
   const fetchAllExercises = () => {
     getDaysForTrainingProgram(programId)
@@ -46,7 +49,7 @@ const DayList = () => {
       })
       .catch((err) => console.error(err));
   };
-// get exercises when programId changes
+  // get exercises when programId changes
   useEffect(() => {
     fetchAllExercises();
   }, [programId]);
@@ -60,6 +63,28 @@ const DayList = () => {
       });
   }, []);
 
+  const handleNewDayTitleChange = (event) => {
+    setNewDayTitle(event.target.value);
+};
+
+const handleAddDay = () => {
+    const newDay = {
+        trainingProgramId: programId,
+        dayNumber: days.length + 1,
+        title: newDayTitle
+    };
+
+    addDay(newDay)
+        .then(() => {
+            handleCloseAddDayModal();
+            fetchAllExercises(); 
+        })
+        .catch((err) => console.error(err));
+};
+
+const handleCloseAddDayModal = () => setShowAddDayModal(false);
+
+
   const handleDayClick = (dayId) => {
     setSelectedDayId(dayId);
     setShowModal(true);
@@ -70,10 +95,7 @@ const DayList = () => {
     getExercisesByMuscleGroupId(id)
       .then(setExercises)
       .catch((error) => {
-        console.error(
-          `Error ${id}:`,
-          error
-        );
+        console.error(`Error ${id}:`, error);
       });
   };
 
@@ -85,9 +107,7 @@ const DayList = () => {
 
     addExerciseToDay(dayExercise)
       .then(fetchAllExercises)
-      .catch((err) =>
-        console.error(err)
-      );
+      .catch((err) => console.error(err));
 
     setShowModal(false);
   };
@@ -95,9 +115,13 @@ const DayList = () => {
   const handleClose = () => setShowModal(false);
 
   return (
-    <div className="my-4">
+    <div className="center-content">
       <h1></h1>
-      <ListGroup variant="flush">
+      <Button variant="success" onClick={() => setShowAddDayModal(true)}>
+    Add New Day
+</Button>
+
+      <ListGroup variant="flush" className="day-custom">
         {days.map((day) => (
           <>
             <ListGroup.Item
@@ -158,7 +182,7 @@ const DayList = () => {
                     <Button
                       variant="outline-primary"
                       size="sm"
-                      className="float-right"
+                      style={{ float: 'right', marginRight: '10px' }}  
                       onClick={() => handleAddExerciseToDay(exercise.id)}
                     >
                       Add
@@ -175,6 +199,29 @@ const DayList = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+      <Modal show={showAddDayModal} onHide={handleCloseAddDayModal}>
+    <Modal.Header closeButton>
+        <Modal.Title>Add New Day</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+        <label>Title:</label>
+        <input 
+            type="text" 
+            className="form-control" 
+            value={newDayTitle} 
+            onChange={handleNewDayTitleChange}
+        />
+    </Modal.Body>
+    <Modal.Footer>
+        <Button variant="outline-secondary" onClick={handleCloseAddDayModal}>
+            Close
+        </Button>
+        <Button variant="primary" onClick={handleAddDay}>
+            Add Day
+        </Button>
+    </Modal.Footer>
+</Modal>
+
     </div>
   );
 };

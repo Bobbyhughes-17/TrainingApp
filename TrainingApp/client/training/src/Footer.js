@@ -16,8 +16,8 @@ const Footer = () => {
 };
 
 const footerStyle = {
-  backgroundColor: "#343a40",
-  color: "#333",
+  backgroundColor: "#333",
+  color: "#fff",
   position: "fixed",
   width: "100%",
   bottom: 0,

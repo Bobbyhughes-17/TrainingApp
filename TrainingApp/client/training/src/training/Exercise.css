@@ -3,6 +3,19 @@
   border-top: 1px solid #dee2e6;
   font-size: 1.25em;
   padding: 0.75rem 1.25rem;
+  position: relative;
+}
+.day-title:hover::after {
+  content: "Click to add an exercise!";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%); 
+  background-color: #f8f9fa; 
+  border: 1px solid #dee2e6;
+  padding: 5px;
+  border-radius: 5px;
+  white-space: nowrap; 
 }
 
 .exercise-item {
@@ -23,14 +36,33 @@
   gap: 20px;
 }
 
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;  /* Spacing between the cards */
+  width: 70%; /* Adjust as necessary */
+  margin: 0 auto; /* Center the card container */
+}
+
 .program-card {
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
+  text-align: center; /* Center the card's content */
 }
 
 .program-card:hover {
   transform: translateY(-5px);
+}
+
+.program-card .card-title {
+  font-size: 1.5em; /* Larger font for the title */
+  margin-bottom: 16px; /* Spacing below the title */
+}
+
+.program-card .card-text {
+  font-size: 1em; /* Set an appropriate font size for the description */
+  margin-bottom: 24px; /* Spacing below the description */
 }
 
 .secondary-button {
@@ -42,4 +74,29 @@
 
 .secondary-button:hover {
   background-color: #e2e6ea;
+}
+
+/* Button spacing */
+.program-card .btn {
+  margin-right: 12px;
+  margin-bottom: 8px;
+}
+
+.day-custom {
+  max-width: 55%;
+
+  
+}
+.center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.collapsed-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* limits to 3 lines, adjust as necessary */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 10px;
 }

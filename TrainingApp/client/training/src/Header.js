@@ -23,7 +23,7 @@ function Header() {
     localStorage.removeItem("token");
     setIsAuthenticated(false);
     setUser(null);
-    navigate("/login");
+    navigate("/");
   };
 
   // get user program and training details when the user changes

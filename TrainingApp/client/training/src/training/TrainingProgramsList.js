@@ -16,6 +16,7 @@ export const TrainingProgramsList = () => {
   const [selectedProgramDays, setSelectedProgramDays] = useState([]);
   const [newProgramName, setNewProgramName] = useState("");
   const [newProgramDays, setNewProgramDays] = useState("");
+  const [newProgramDesc, setNewProgramDesc] = useState("");
   const [showModal, setShowModal] = useState(false);
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
@@ -66,11 +67,25 @@ export const TrainingProgramsList = () => {
       .then(() => {
         setNewProgramName("");
         setNewProgramDays("");
+        setNewProgramDesc("");
         refreshPrograms();
       })
       .catch((err) => console.error(err));
   };
-
+  function ProgramDescription({ text }) {
+    const [isExpanded, setIsExpanded] = useState(false);
+    
+    return (
+        <>
+            <Card.Text className={isExpanded ? '' : 'collapsed-text'}>
+                {text}
+            </Card.Text>
+            <Button variant="link" onClick={() => setIsExpanded(!isExpanded)}>
+                {isExpanded ? 'Read Less' : 'Read More'}
+            </Button>
+        </>
+    );
+}
   return (
     <div className="container my-4">
       <h1 className="header">Training Programs</h1>
@@ -98,6 +113,13 @@ export const TrainingProgramsList = () => {
               onChange={(e) => setNewProgramDays(e.target.value)}
               className="mr-2"
             />
+             <Form.Control
+              type="text"
+              placeholder="Program Description"
+              value={newProgramDesc}
+              onChange={(e) => setNewProgramDesc(e.target.value)}
+              className="mr-2"
+            />
           </Form>
         </Modal.Body>
         <Modal.Footer>
@@ -117,27 +139,32 @@ export const TrainingProgramsList = () => {
       </Modal>
 
       <div className="card-container mt-4">
-        {programs.map((program) => (
-          <Card className="program-card" key={program.id}>
-            <Card.Body>
-              <Card.Title>{program.name}</Card.Title>
-              <Button
-                variant="outline-primary"
-                className="ml-2"
-                onClick={() => navigateToDaysPage(program.id)}
-              >
-                Details
-              </Button>
-              <Button
-                className="secondary-button ml-2"
-                onClick={() => handleAddProgramToUser(program.id)}
-              >
-                Add to My Programs
-              </Button>
-            </Card.Body>
-          </Card>
-        ))}
-      </div>
+    {programs.map((program) => (
+       <Card className="program-card" key={program.id}>
+       <Card.Body>
+           <Card.Title>{program.name}</Card.Title>
+           <ProgramDescription text={program.programDescription} />
+           <div className="button-container">
+               <Button
+                   variant="outline-primary"
+                   className="ml-2"
+                   onClick={() => navigateToDaysPage(program.id)}
+               >
+                   Details
+               </Button>
+               <Button
+                   className="secondary-button ml-2"
+                   onClick={() => handleAddProgramToUser(program.id)}
+               >
+                   Add to My Programs
+               </Button>
+           </div>
+       </Card.Body>
+   </Card>
+   
+    ))}
+</div>
+
 
       {selectedProgramDays.length > 0 && (
         <div className="mt-4">
