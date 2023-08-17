@@ -1,0 +1,17 @@
+.smooth-image {
+  border: none;
+  border-radius: 5px;
+}
+.smooth-image {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.smooth-image {
+  transition: transform 0.3s ease;
+}
+
+.smooth-image:hover {
+  transform: scale(1.05);
+}
+.smooth-image {
+  filter: grayscale(20%);
+}

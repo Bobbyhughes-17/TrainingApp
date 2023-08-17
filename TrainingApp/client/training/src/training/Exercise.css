@@ -1,0 +1,45 @@
+.day-title {
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+  font-size: 1.25em;
+  padding: 0.75rem 1.25rem;
+}
+
+.exercise-item {
+  padding: 0.25rem 1.25rem;
+}
+
+.exercise-name {
+  font-weight: bold;
+}
+
+.exercise-description {
+  font-size: 0.9em;
+  margin-left: 5px;
+}
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.program-card {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.program-card:hover {
+  transform: translateY(-5px);
+}
+
+.secondary-button {
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+  color: #333;
+  transition: background-color 0.2s;
+}
+
+.secondary-button:hover {
+  background-color: #e2e6ea;
+}

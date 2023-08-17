@@ -1,0 +1,61 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 30px;
+  background-color: #333;
+}
+
+.navbar-brand {
+  color: #fff;
+  font-weight: bold;
+  font-size: 24px;
+  margin-right: auto;
+}
+
+.nav-item {
+  margin-left: 20px;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+button {
+  background-color: #f00;
+  color: #fff;
+  border: none;
+  padding: 5px 15px;
+  cursor: pointer;
+}
+
+.dropdown {
+  margin-left: 20px;
+}
+
+.nav-item:hover {
+  color: #64b5f6;
+  transition: color 0.3s ease;
+  text-shadow: 0 0 10px #a429f7, 0 0 20px #a216f3, 0 0 30px #8400ff,
+    0 0 40px #8507ec;
+}
+
+.custom-modal-header {
+  background-color: #333;
+  color: #fff;
+}
+
+.custom-modal-body {
+  padding: 20px;
+}
+
+.custom-modal-footer {
+  background-color: #eee;
+}
+.input-group-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.input-group label {
+  margin-bottom: 5px;
+}
