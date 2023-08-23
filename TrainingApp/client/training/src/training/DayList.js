@@ -124,6 +124,7 @@ const handleCloseAddDayModal = () => setShowAddDayModal(false);
       <ListGroup variant="flush" className="day-custom">
         {days.map((day) => (
           <>
+          <br></br>
             <ListGroup.Item
               action
               onClick={() => {
@@ -145,8 +146,9 @@ const handleCloseAddDayModal = () => setShowAddDayModal(false);
                     <strong className="exercise-name">
                       {exercise ? exercise.name : "Loading..."}
                     </strong>
+                    <br></br>
                     <span className="exercise-description">
-                      {exercise ? ` - ${exercise.description}` : "Loading..."}
+                      {exercise ? `  ${exercise.description}` : "Loading..."}
                     </span>
                   </ListGroup.Item>
                 );

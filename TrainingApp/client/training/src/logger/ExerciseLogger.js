@@ -130,9 +130,9 @@ const ExerciseLogger = () => {
           days.find((day) => day.dayNumber === currentDay)?.title) ||
           "Select a Day"}
       </h2>
-
+<div className="container-for-card">
       {exercises.map((exercise) => (
-        <Card className="mb-4" key={exercise.id}>
+        <Card className="mb-4 logger-cardd" key={exercise.id}>
           <Card.Body>
             <Card.Title>{exercise.name}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">
@@ -141,7 +141,7 @@ const ExerciseLogger = () => {
             {setLogs[exercise.id] &&
               setLogs[exercise.id].map((log, index) => (
                 <Form.Group key={index} as={Row}>
-                  <Col xs={6}>
+                  <Col xs={5}>
                     <Form.Label>Reps:</Form.Label>
                     <Form.Control
                       type="number"
@@ -176,7 +176,9 @@ const ExerciseLogger = () => {
             </Button>
           </Card.Body>
         </Card>
+        
       ))}
+      </div>
 
       <Button variant="dark" size="lg" onClick={handleLogSubmit}>
         Submit Logs

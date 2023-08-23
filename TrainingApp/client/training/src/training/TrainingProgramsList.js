@@ -142,7 +142,7 @@ export const TrainingProgramsList = () => {
     {programs.map((program) => (
        <Card className="program-card" key={program.id}>
        <Card.Body>
-           <Card.Title>{program.name}</Card.Title>
+           <Card.Title className="card-title-program">{program.name}</Card.Title>
            <ProgramDescription text={program.programDescription} />
            <div className="button-container">
                <Button

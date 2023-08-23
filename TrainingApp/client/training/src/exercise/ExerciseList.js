@@ -6,6 +6,7 @@ import {
   updateExercise,
   deleteExercise,
 } from "../Managers/ExerciseManager";
+import { getMuscleGroupById } from "../Managers/MuscleGroupManager";
 import {
   Container,
   Row,
@@ -27,6 +28,7 @@ const ExerciseList = ({ muscleGroupId }) => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [muscleGroup, setMuscleGroup] = useState({});
   const [exerciseToUpdate, setExerciseToUpdate] = useState({});
   const [exerciseFormData, setExerciseFormData] = useState({
     name: "",
@@ -41,6 +43,12 @@ const ExerciseList = ({ muscleGroupId }) => {
       .catch((err) => console.error(err));
   }, [muscleGroupIdToUse]);
 
+  useEffect(() => {
+    getMuscleGroupById(muscleGroupIdToUse)
+      .then(setMuscleGroup)
+      .catch((err) => console.error(err));
+  }, [muscleGroupIdToUse]);
+  
   const handleAdd = () => {
     addExercise(exerciseFormData).then((newExercise) => {
       setExercises([...exercises, newExercise]);
@@ -81,7 +89,7 @@ const ExerciseList = ({ muscleGroupId }) => {
           >
             <FontAwesomeIcon icon={faPlus} /> Add Exercise
           </Button>
-          <h2 className="text-center mb-4">Exercises</h2>
+          <h2 className="text-center mb-4 exerciseHeader">Exercises for {muscleGroup.name}</h2>
           <Row>
             {exercises.map((exercise) => (
               <Col md={4} key={exercise.id}>

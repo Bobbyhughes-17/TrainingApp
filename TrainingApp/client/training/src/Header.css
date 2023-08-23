@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   padding: 10px 30px;
-  background-color: #333;
+  background-color: #4e4e4e;
 }
 
 .navbar-brand {
@@ -34,8 +34,8 @@ button {
 .nav-item:hover {
   color: #64b5f6;
   transition: color 0.3s ease;
-  text-shadow: 0 0 10px #a429f7, 0 0 20px #a216f3, 0 0 30px #8400ff,
-    0 0 40px #8507ec;
+  text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff,
+    0 0 40px #ffffff;
 }
 
 .custom-modal-header {
